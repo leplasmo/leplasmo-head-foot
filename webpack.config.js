@@ -8,7 +8,7 @@ module.exports = (_, argv) => ({
     publicPath:
       argv.mode === "development"
         ? "http://localhost:8080/"
-        : "https://leplasmo-head-foot.vercel.app",
+        : "https://leplasmo-head-foot.vercel.app/",
   },
 
   resolve: {
