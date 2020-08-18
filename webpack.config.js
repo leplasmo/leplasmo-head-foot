@@ -7,7 +7,7 @@ module.exports = (_, argv) => ({
   output: {
     publicPath:
       argv.mode === "development"
-        ? "http://localhost:8080/"
+        ? "http://localhost:8081/"
         : "https://leplasmo-head-foot.vercel.app/",
   },
 
@@ -16,15 +16,11 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 8080,
+    port: 8081,
   },
 
   module: {
     rules: [
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -37,14 +33,14 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "starter",
+      name: "leplasmo-head-foot",
+      library: { type: "var", name: "leplasmo-head-foot" },
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: {},
+      exposes: {
+        "./Header": "./src/Header",
+      },
       shared: require("./package.json").dependencies,
-    }),
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
     }),
   ],
 });
