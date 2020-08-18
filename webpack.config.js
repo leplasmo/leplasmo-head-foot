@@ -1,9 +1,14 @@
+/** @format */
+
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
-module.exports = {
+module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:8080/",
+    publicPath:
+      argv.mode === "development"
+        ? "http://localhost:8080/"
+        : "leplasmo-head-foot.vercel.app",
   },
 
   resolve: {
@@ -42,4 +47,4 @@ module.exports = {
       template: "./src/index.html",
     }),
   ],
-};
+});
